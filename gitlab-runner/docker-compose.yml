@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  runner:
+    image: gitlab/gitlab-runner
+    container_name: gitlab-runner
+    restart: always
+    volumes:
+     - runner-config:/etc/gitlab-runner
+     - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  runner-config:
+    name: gitlab-runner-config
+    external: true
+
