@@ -1,17 +1,16 @@
 version: '3.4'
 services:
   mongo:
-    container_name: mongodb
+    container_name: mongo
     image: mongo
     restart: always
     ports:
       - 27017:27017
     volumes:
-      - mongo-data:/data
+      - mongo-data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
-    command: mongod --config /data/mongod.conf
 
   mongo-admin:
     container_name: mongo-admin
@@ -22,7 +21,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
-
+# docker volume create --name=mongo-data
 volumes:
   mongo-data:
     name: mongo-data
