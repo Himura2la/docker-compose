@@ -3,7 +3,7 @@
 
 ```
 host:~$ docker volume create --name=gitlab-runner-config
-host:~$ docker-compose up -d
-host:~$ docker container exec -it gitlab-runner /bin/bash
+host:~$ docker-compose up --build -d
+host:~$ docker exec -it gitlab-runner bash
 container:/# gitlab-runner register
 ```
