@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  registry:
+    container_name: registry
+    image: registry:2
+    restart: always
+    ports:
+      - 443:443
+    volumes:
+      - registry-config:/etc/docker/registry
+      - registry-storage:/var/lib/registry
+volumes:
+  registry-config:
+    name: registry-config
+    external: true
+  registry-storage:
+    name: registry-storage
+    external: true
