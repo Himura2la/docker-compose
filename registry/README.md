@@ -5,7 +5,18 @@ When generating a certificate, use the domain or host name for which this certif
 ```sh
 docker volume create --name=registry-storage
 docker volume create --name=registry-config
-docker run --rm -itv registry-config:/v -w /v alpine sh -c "apk update && apk add vim openssl && openssl req -newkey rsa:4096 -nodes -sha256 -keyout self-signed.key -x509 -days 365 -out self-signed.crt && wget https://raw.githubusercontent.com/Himura2la/docker-compose/master/registry/config.yml -O config.yml && vi config.yml && cat self-signed.crt"
+
+docker run --rm -itv registry-config:/v -w /v bash
+# execute commands below (before exit) inside the container
+apk update
+apk add vim openssl
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout registry.key -x509 -days 365 -out registry.crt
+wget https://raw.githubusercontent.com/Himura2la/docker-compose/master/registry/config.yml
+vim config.yml
+cat registry.crt
+exit
+# back to the host system
+
 docker-compose up --build -d
 docker logs registry -f
 ```
